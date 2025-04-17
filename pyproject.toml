@@ -1,0 +1,11 @@
+[project]
+name = "larp-bot"
+version = "0.1.0"
+description = "Cusomizable LARP bot with UI access to DB"
+requires-python = ">=3.13"
+authors = [
+  { name="Kirill Penzin", email="aglarond21@gmail.com" }
+]
+dependencies = [
+    "python-telegram-bot>=22.0",
+]
