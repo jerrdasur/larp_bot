@@ -26,7 +26,7 @@ class CsvDataStore(DataStore):
                 if int(row['user_id']) == user_id:
                     return UserData(
                         user_id=int(row['user_id']),
-                        first_name=row['first_name'],
+                        username=row['username'],
                         character_name=row['character_name'],
                         roles=row['roles'].split(';')
                     )
@@ -39,11 +39,27 @@ class CsvDataStore(DataStore):
             for row in reader:
                 users.append(UserData(
                     user_id=int(row['user_id']),
-                    first_name=row['first_name'],
+                    username=row['username'],
                     character_name=row['character_name'],
                     roles=row['roles'].split(';')
                 ))
         return users
+
+    def register_user(self, user_data: UserData) -> None:
+        """Добавляет пользователя в CSV-файл users_file"""
+        # Проверяем, существует ли уже пользователь
+        existing = self.get_user(user_data.user_id)
+        if existing:
+            return
+        with open(self.users_file, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            roles_str = ';'.join(user_data.roles)
+            writer.writerow([
+                user_data.user_id,
+                user_data.username,
+                user_data.character_name,
+                roles_str
+            ])
 
     def get_secret_phrase(self) -> str:
         with open(self.secret_file, encoding='utf-8') as f:

@@ -11,6 +11,10 @@ class DataStore(ABC):
         pass
 
     @abstractmethod
+    def register_user(self, user_data: UserData) -> None:
+        pass
+
+    @abstractmethod
     def list_users(self) -> list[UserData]:
         """Возвращает список всех зарегистрированных пользователей."""
         pass

@@ -1,7 +1,8 @@
 from typing import List
 
 from telegram import Update
-from telegram.ext import Application, ApplicationBuilder, MessageHandler, filters, ContextTypes, CommandHandler
+from telegram.ext import Application, ApplicationBuilder, MessageHandler, filters, ContextTypes, CommandHandler, \
+    CallbackContext
 
 from core.base_command import BaseCommand
 
